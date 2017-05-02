@@ -18,7 +18,9 @@ namespace Taffy_Bot
             "@everyone",
             "Admin",
             "Bot",
-            "Fille Movie Maker ✓"
+            "Fille Movie Maker ✓",
+            "Youtuber",
+            "Streamer"
         };
 
         public Bot()
