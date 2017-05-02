@@ -43,7 +43,7 @@ namespace Taffy_Bot
                     "```" +
                     "!help          -   Displays all available commands.\n" +
                     "!roles         -   Displays all available roles.\n" +
-                    "!roles add     -   Adds a role to you." +
+                    "!roles add     -   Adds a role to you.\n" +
                     "!roles remove  -   Removes a role from you." +
                     "```");
             });
