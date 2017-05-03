@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -102,8 +103,26 @@ namespace Taffy_Bot
                     return;
                 }
 
-                e.User.RemoveRoles(roles.FirstOrDefault(role => role.Name == arg));
+                await e.User.RemoveRoles(roles.FirstOrDefault(role => role.Name == arg));
                 await e.Channel.SendMessage("Removed the role of ***" + arg + "***.");
+            });
+            /*m_CmdService.CreateCommand("db return_users").Do(async (e) =>
+            {
+                //SqlService.GetProfile(1265);
+                await e.Channel.SendMessage("This is not implemented.");
+            });
+            m_CmdService.CreateCommand("dbr").Do(async (e) =>
+            {
+                await e.Channel.SendMessage("No");
+                Console.WriteLine("Used");
+                SqlService.UploadUser(e.User);
+                Console.WriteLine("After");
+            });*/
+            m_CmdService.CreateCommand("coinflip").Do(async (e) =>
+            {
+                Random r = new Random();
+                int numb = r.Next(0, 100);
+                await e.Channel.SendMessage("The coin flipped and got " + (numb < 50 && numb >= 0 ? "**heads**" : "**tails**") + ".");
             });
 
             m_Client.ExecuteAndWait(async () =>
