@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public static class SqlService
 {
-    private static SqlConnection conn;
+    private static SqlConnection conn = new SqlConnection();
 
     public static void GetProfile(int _id)
     {
@@ -36,14 +36,24 @@ public static class SqlService
     }
     public static void UploadUser(User _user)
     {
-        conn = new SqlConnection(
-        @"Data Source=sql9.freesqldatabase.com;Database=sql9172400;UID=sql9172400;Password=ZxgDeFHSlP;Timeout=5;");
+        conn.ConnectionString = 
+            "server=sql9.freesqldatabase.com,3306;" +
+            "database=sql9172400;" +
+            "uid=sql9172400;" +
+            "pwd=ZxgDeFHSlP;";
 
         Console.WriteLine("Nomnom is using this");
         using (conn)
         {
             Console.WriteLine("Using cmd");
-            conn.Open();
+            try
+            {
+                conn.OpenAsync();
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }
             Console.WriteLine("Using conn");
             using (SqlCommand cmd = conn.CreateCommand())
             {
@@ -58,7 +68,7 @@ public static class SqlService
 
                 Console.WriteLine("Before execute");
 
-                cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQueryAsync();
 
                 Console.WriteLine("After execute");
 
@@ -68,7 +78,7 @@ public static class SqlService
             }
         }
     }
-    private static string SnipUserId(string _name)
+    public static string SnipUserId(string _name)
     {
         return _name.Substring(0, _name.Length - 5);
     }
