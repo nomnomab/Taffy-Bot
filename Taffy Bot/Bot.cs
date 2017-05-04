@@ -10,6 +10,15 @@ namespace Taffy_Bot
 {
     public class Bot
     {
+        const string VersionNotes = 
+            "```" +
+            "Taffy-Bot (Version 1.7) \n" +
+            "Created by Nomnom \n" +
+            "----------- \n" +
+            "* Added a bot channel to check when the bot goes online. \n" +
+            "* Added a welcome message. \n" +
+            "```";
+
         Server m_Server;
         DiscordClient m_Client;
         CommandService m_CmdService;
@@ -130,12 +139,17 @@ namespace Taffy_Bot
                 int numb = r.Next(0, 100);
                 await e.Channel.SendMessage("The coin flipped and got " + (numb < 50 && numb >= 0 ? "**heads**" : "**tails**") + ".");
             });
+            m_CmdService.CreateCommand("bot").Do(async (e) =>
+            {
+                await e.Channel.SendMessage(VersionNotes);
+            });
 
             m_Client.ExecuteAndWait(async () =>
             {
                 Console.WriteLine("Line");
                 await m_Client.Connect("MzA4OTQ1MTIxMDc5MTk3Njk3.C-oPkg.o9s_EOLxPxeT_AWFhpVZNLN6w3Y", TokenType.Bot);
                 m_Client.UserJoined += M_Client_UserJoined;
+                Console.WriteLine("Connected");
             });
         }
 
