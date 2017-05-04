@@ -62,7 +62,9 @@ namespace Taffy_Bot
                     "!help          -   Displays all available commands.\n" +
                     "!roles         -   Displays all available roles.\n" +
                     "!roles add     -   Adds a role to you.\n" +
-                    "!roles remove  -   Removes a role from you." +
+                    "!roles remove  -   Removes a role from you.\n" +
+                    "!coinflip      -   Flips a coin.\n" +
+                    "!bot           -   Look at the current bot version info.\n" +
                     "```");
             });
             m_CmdService.CreateCommand("roles").Do(async (e) =>
