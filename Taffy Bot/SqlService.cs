@@ -6,42 +6,52 @@ using System.Threading.Tasks;
 
 public static class SqlService
 {
-    private static SqlConnection conn = new SqlConnection();
+    private static SqlConnection conn = new SqlConnection(
+        "server=sql9.freesqldatabase.com,3306;" +
+        "database=sql9172400;" +
+        "uid=sql9172400;" +
+        "pwd=ZxgDeFHSlP;");
 
-    public static void GetProfile(int _id)
+    public static string GetProfile(int _id)
     {
         Console.WriteLine("Nomnom is using this.");
         using (conn)
         {
-            using(SqlCommand cmd = conn.CreateCommand())
+            try
             {
-                conn.Open();
-                cmd.CommandText = @"SELECT * FROM players WHERE id = ?" + _id;
+                conn.OpenAsync();
+            }
+            catch(SqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.WriteLine("Opened");
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = @"SELECT * FROM players WHERE id = ?id";
+                cmd.Parameters.Add("?id", SqlDbType.VarChar).Value = _id;
 
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (!reader.HasRows)
                 {
                     reader.Close();
                     conn.Close();
-                    return;
+                    return "Wut";
                 }
+                Console.WriteLine("Reading");
                 while (reader.Read())
                 {
-                    Console.WriteLine(reader.GetString(1));
+                    return reader["id"].ToString();
                 }
+                Console.WriteLine("After Read");
                 reader.Close();
                 conn.Close();
             }
         }
+        return "No User Found";
     }
     public static void UploadUser(User _user)
     {
-        conn.ConnectionString = 
-            "server=sql9.freesqldatabase.com,3306;" +
-            "database=sql9172400;" +
-            "uid=sql9172400;" +
-            "pwd=ZxgDeFHSlP;";
-
         Console.WriteLine("Nomnom is using this");
         using (conn)
         {

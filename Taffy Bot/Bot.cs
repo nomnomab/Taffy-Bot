@@ -123,10 +123,9 @@ namespace Taffy_Bot
                 await e.User.RemoveRoles(roles.FirstOrDefault(role => role.Name == arg));
                 await e.Channel.SendMessage("Removed the role of ***" + arg + "***.");
             });
-            m_CmdService.CreateCommand("db return_users").Do(async (e) =>
+            /*m_CmdService.CreateCommand("db return_users").Do(async (e) =>
             {
-                //SqlService.GetProfile(1265);
-                await e.Channel.SendMessage("This is not implemented.");
+                await e.Channel.SendMessage(SqlService.GetProfile(1265));
             });
             m_CmdService.CreateCommand("dbr").Do(async (e) =>
             {
@@ -134,6 +133,10 @@ namespace Taffy_Bot
                 Console.WriteLine("Used");
                 SqlService.UploadUser(e.User);
                 Console.WriteLine("After");
+            });*/
+            m_CmdService.CreateCommand("slap").Parameter("user2", ParameterType.Required).Do(async (e) =>
+            {
+                await e.Channel.SendMessage(e.User.NicknameMention + " slapped " + e.GetArg("user2") + " with a piece of seaweed!");
             });
             m_CmdService.CreateCommand("coinflip").Do(async (e) =>
             {
