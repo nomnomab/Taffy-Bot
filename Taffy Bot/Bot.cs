@@ -64,6 +64,7 @@ namespace Taffy_Bot
                     "!roles add     -   Adds a role to you.\n" +
                     "!roles remove  -   Removes a role from you.\n" +
                     "!coinflip      -   Flips a coin.\n" +
+                    "!slap          -   Slaps a user with seaweed!\n" +
                     "!bot           -   Look at the current bot version info.\n" +
                     "```");
             });
