@@ -36,7 +36,8 @@ namespace Taffy_Bot
             "Bot",
             "Fille Movie Maker ✓",
             "Youtuber",
-            "Streamer"
+            "Streamer",
+            "Enforcer"
         };
 
         public Bot()
