@@ -154,7 +154,7 @@ namespace Taffy_Bot
             m_Client.ExecuteAndWait(async () =>
             {
                 Console.WriteLine("Line");
-                await m_Client.Connect("MzA4OTQ1MTIxMDc5MTk3Njk3.C-oPkg.o9s_EOLxPxeT_AWFhpVZNLN6w3Y", TokenType.Bot);
+                await m_Client.Connect("token", TokenType.Bot);
                 m_Client.UserJoined += M_Client_UserJoined;
                 Console.WriteLine("Connected");
             });
